@@ -1,3 +1,25 @@
+uae4all2_AmigaPi
+Amiga Emulator that can be started automatically.
+
+Usage: uae4all2 gamefile.conf
+
+gamefile.conf = configuration game file.
+
+If gamefile.conf is present at startup the emulator reads the conf file and
+loads the floppies df0-df3 then starts the emulation automatically.
+
+If emulation is running floppies can be swapped using the keyboard.
+Press and hold "Esc" then press F1-F4 to swap floppy of DF0-DF3 into DF0.
+If emulation is running pressing F12 compeletely exits the Amiga Emulator.
+
+If the game config files are set up correctly there should be no need to use
+the gui of the emulator.
+With this its possible to completely bypass the gui and use the emulator with
+e.g. Emulation-Station.
+
+==========================================
+ ORIGINAL README
+==========================================
 Uae4all2
 A fast and optimized Amiga Emulator
 
