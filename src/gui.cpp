@@ -80,7 +80,15 @@ extern int keycode2amiga(SDL_keysym *prKeySym);
 extern int uae4all_keystate[];
 
 int emulating=0;
-char uae4all_game_conf_file[256] = { 0, };
+char uae4all_game_conf_file0[256] = { 0, };
+char uae4all_game_conf_file1[256] = { 0, };
+char uae4all_game_conf_file2[256] = { 0, };
+char uae4all_game_conf_file3[256] = { 0, };
+char uae4all_game_conf_file4[256] = { 0, };
+char uae4all_game_conf_file5[256] = { 0, };
+char uae4all_game_conf_file6[256] = { 0, };
+char uae4all_game_conf_file7[256] = { 0, };
+
 char uae4all_image_file0[256]    = { 0, };
 char uae4all_image_file1[256]    = { 0, };
 char uae4all_image_file2[256]    = { 0, };
@@ -522,24 +530,44 @@ void gui_handle_events (void)
 		goMenu();
 
 	// perform disk change on key pressed.
-	// press and hold escape, then F1 - F4 to swap DF0-DF3 into DF0 without gui.
-	if(keystate[SDLK_F1] && (nr_drives >= 1) && (esc_key_pressed == 1)) {
-		strcpy(uae4all_image_file0, uae4all_game_conf_file);
+	// press and hold escape, then F1 - F8 to swap DISK 1-8 into DF0 without gui.
+	if(keystate[SDLK_F1] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file0);
 		strcpy(changed_df[0],uae4all_image_file0);
 		real_changed_df[0]=1;
 	}
-	if(keystate[SDLK_F2] && (nr_drives >= 2) && (esc_key_pressed == 1)) {
-		strcpy(uae4all_image_file0, uae4all_image_file1);
+	if(keystate[SDLK_F2] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file1);
 		strcpy(changed_df[0],uae4all_image_file0);
 		real_changed_df[0]=1;
 	}
-	if(keystate[SDLK_F3] && (nr_drives >= 3) && (esc_key_pressed == 1)) {
-		strcpy(uae4all_image_file0, uae4all_image_file2);
+	if(keystate[SDLK_F3] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file2);
 		strcpy(changed_df[0],uae4all_image_file0);
 		real_changed_df[0]=1;
 	}
-	if(keystate[SDLK_F4] && (nr_drives >= 4) && (esc_key_pressed == 1)) {
-		strcpy(uae4all_image_file0, uae4all_image_file3);
+	if(keystate[SDLK_F4] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file3);
+		strcpy(changed_df[0],uae4all_image_file0);
+		real_changed_df[0]=1;
+	}
+	if(keystate[SDLK_F5] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file4);
+		strcpy(changed_df[0],uae4all_image_file0);
+		real_changed_df[0]=1;
+	}
+	if(keystate[SDLK_F6] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file5);
+		strcpy(changed_df[0],uae4all_image_file0);
+		real_changed_df[0]=1;
+	}
+	if(keystate[SDLK_F7] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file6);
+		strcpy(changed_df[0],uae4all_image_file0);
+		real_changed_df[0]=1;
+	}
+	if(keystate[SDLK_F8] && (esc_key_pressed == 1)) {
+		strcpy(uae4all_image_file0, uae4all_game_conf_file7);
 		strcpy(changed_df[0],uae4all_image_file0);
 		real_changed_df[0]=1;
 	}

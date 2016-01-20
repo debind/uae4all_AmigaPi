@@ -41,7 +41,14 @@ struct gui_info
 #ifndef _GUI_CPP
 extern struct gui_info gui_data;
 
-extern char uae4all_game_conf_file[256];
+extern char uae4all_game_conf_file0[256];
+extern char uae4all_game_conf_file1[256];
+extern char uae4all_game_conf_file2[256];
+extern char uae4all_game_conf_file3[256];
+extern char uae4all_game_conf_file4[256];
+extern char uae4all_game_conf_file5[256];
+extern char uae4all_game_conf_file6[256];
+extern char uae4all_game_conf_file7[256];
 extern char uae4all_image_file0[256];
 extern char uae4all_image_file1[256];
 extern char uae4all_image_file2[256];

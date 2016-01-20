@@ -79,6 +79,9 @@ char warning_buffer[256];
  * PostScript printer or ghostscript -=SR=-
  */
 
+int getNumber(char* string, char* pattern, int* pnumb);
+int replaceNumber(char* string, char* pattern, int numb);
+
 
 void discard_prefs ()
 {
@@ -205,6 +208,9 @@ void leave_program (void)
 
 void real_main (int argc, char **argv)
 {
+	int numb;
+	char pattern[100];
+	char txt[100];
 #ifdef USE_SDL
     SDL_Init (SDL_INIT_VIDEO | SDL_INIT_JOYSTICK 
 #if !defined(NO_SOUND) && !defined(GP2X)
@@ -223,7 +229,52 @@ void real_main (int argc, char **argv)
 	{
 		if (strlen(argv[1]) < 255)
 		{
-			strcpy(uae4all_game_conf_file, argv[1]);
+			strcpy(uae4all_game_conf_file0, argv[1]);
+
+			strcpy(uae4all_game_conf_file1, argv[1]);
+			strcpy(uae4all_game_conf_file2, argv[1]);
+			strcpy(uae4all_game_conf_file3, argv[1]);
+			strcpy(uae4all_game_conf_file4, argv[1]);
+			strcpy(uae4all_game_conf_file5, argv[1]);
+			strcpy(uae4all_game_conf_file6, argv[1]);
+			strcpy(uae4all_game_conf_file7, argv[1]);
+			getNumber(uae4all_game_conf_file0, "disk 1 of %", &numb);
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file1, pattern, '2');
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file2, pattern, '3');
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file3, pattern, '4');
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file4, pattern, '5');
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file5, pattern, '6');
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file6, pattern, '7');
+
+			strcpy(pattern, "disk %");
+			sprintf(txt, " of %d", numb);
+			strcat(pattern, txt);
+		    replaceNumber(uae4all_game_conf_file7, pattern, '8');
+
 		}
 	}
 
@@ -319,4 +370,91 @@ void discard_prefs_uae (struct uae_prefs *p)
 {
     free_mountinfo (p->mountinfo);
 }
+
+
+int getNumber(char* string, char* pattern, int* pnumb)
+{
+	int n=0;
+	int numb = 0x30;
+	int fail = 0;
+
+	if (strlen(string) < strlen(pattern)) return 1;
+
+	for (int n=0; n <= strlen(string)-strlen(pattern); n++)
+	{
+		char* pa = &string[n];
+		char* pb = &pattern[0];
+		fail = 0;
+		for (int m=0; m < strlen(pattern); m++)
+		{
+			char a = ((*pa >= 0x41) && (*pa <= 0x5a)) ? (*pa + 0x20) : *pa;
+			char b = ((*pb >= 0x41) && (*pb <= 0x5a)) ? (*pb + 0x20) : *pb;
+			if (a != b) 
+			{
+				if (*pb != '%')
+				{
+					fail = 1;
+					break;
+				}
+				else
+				{
+					numb = *pa;
+				}
+			}
+			pa++;
+			pb++;
+		}
+		if (fail == 0) break;
+	}
+	*pnumb = numb - 0x30;
+	return fail;
+}
+
+int replaceNumber(char* string, char* pattern, int numb)
+{
+	int n, m;
+	int num;
+	int fail = 0;
+
+	if (strlen(string) < strlen(pattern)) return 1;
+
+	for (n=0; n <= strlen(string)-strlen(pattern); n++)
+	{
+		char* pa = &string[n];
+		char* pb = &pattern[0];
+		fail = 0;
+		for (m=0; m < strlen(pattern); m++)
+		{
+			char a = ((*pa >= 0x41) && (*pa <= 0x5a)) ? (*pa + 0x20) : *pa;
+			char b = ((*pb >= 0x41) && (*pb <= 0x5a)) ? (*pb + 0x20) : *pb;
+			if (a != b) 
+			{
+				if (*pb != '%')
+				{
+					fail = 1;
+					break;
+				}
+				else
+				{
+					num = m;
+				}
+			}
+			pa++;
+			pb++;
+		}
+		if (fail == 0) break;
+	}
+	if (fail == 0)
+	{
+		return string[n+num]=numb;
+	}
+	else
+	{
+		return -1;
+	}
+	return fail;
+}
+
+
+
 #endif

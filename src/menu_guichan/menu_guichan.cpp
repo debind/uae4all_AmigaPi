@@ -195,13 +195,20 @@ void run()
 		else {
 			if (Block == 2)	
 			{	
-				strcpy(uae4all_image_file0, uae4all_game_conf_file);
+				strcpy(uae4all_image_file0, uae4all_game_conf_file0);
 				strcpy(launchDirBak, launchDir);
-				strcpy(launchDir, uae4all_game_conf_file);
+				strcpy(launchDir, uae4all_game_conf_file0);
 				
 				char* pDst = launchDir + strlen(launchDir);
 				while ((pDst > launchDir) && (*pDst != '/')) pDst--;   
-				pDst--;                                      
+				pDst++;
+
+				// setup current Dir
+				*pDst = 0;
+				strcpy(currentDir, launchDir);
+				pDst--;
+				pDst--;
+
 				while ((pDst > launchDir) && (*pDst != '/')) pDst--;   
 				*pDst=0;                                     
 
